@@ -17,8 +17,8 @@ function farm = farmdesign
                      % (2,...) for other grids defined in mag_setup_farm.m 
  
  % initial B/Q conditions
-%farm.seedingB = 0.1 * 1e3; % seeding biomass [g-dry m-2] 
- farm.seedingB = 3 * 1e3; % seeding biomass [g-dry m-2] 
+ farm.seedingB = 0.3 * 1e3; % seeding biomass [g-dry m-2] 
+%farm.seedingB = 3 * 1e3; % seeding biomass [g-dry m-2] 
  % %% %% %% %% %% %% %% %% %% %% %% %% %% %% %% %% %% %% %% 
  % ## CHECK UNITS ### (it said per meter)
  % I think this should be g-dry/m^2 
