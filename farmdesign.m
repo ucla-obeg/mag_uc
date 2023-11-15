@@ -11,7 +11,7 @@ function farm = farmdesign
 
 % Farm dimensions and grid
 
- farm.z_cult = -10; % [m] Depth at which farm is seeded (negative below the surface)
+ farm.z_cult = -20; % [m] Depth at which farm is seeded (negative below the surface)
  farm.nz = 100;
  farm.grid_mode = 1; % (1) for equally spaced grid, with nz levels
                      % (2,...) for other grids defined in mag_setup_farm.m 

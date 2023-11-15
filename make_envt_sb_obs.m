@@ -73,7 +73,6 @@ function envt = make_envt_sb_ROMS(farm,setup,time);
     envt.(roms_vars{indv}) = tmp1;
  end
 
-
 %----------------------------------------------------------------------
 % Postprocesses some of the inputs
  %envt.DON = 16/106 * envt.DOC;
@@ -92,11 +91,8 @@ function envt = make_envt_sb_ROMS(farm,setup,time);
  envt.T = envt.temp;
  envt = rmfield(envt,{'temp'});
 
-
-
- 
 % PAR0 is the PAR at the surface; for now uses ROMS at first layer
- envt.PAR0 = roms.PAR(:,1)'/5 % ;(µmol m-2) to w/m2
+ envt.PAR0 = roms.PAR(:,1)'/5; % ;(µmol m-2) to w/m2
  
  %envt.PAR0(isnan(envt.PAR0)) = nanmean(roms.PAR(:,1)'/5);
 % Note, depth-dependent PAR not needed, here removes it
@@ -120,7 +116,6 @@ function envt = make_envt_sb_ROMS(farm,setup,time);
  envt.Hs = envt.wavemeanHS;
  envt = rmfield(envt,{'wavemeanTP','wavemeanHS'});
 
-
 % Do here any additional postprocessing (included for testing)
 % To get default, uncomment the following; set to default values:
 %envt.NO3 = envt.NO3 * 0 + 1.6;		% 1.6
@@ -133,6 +128,22 @@ function envt = make_envt_sb_ROMS(farm,setup,time);
 %envt.Tw = envt.Tw * 0 + 0.00216;	% 0.00216
 %envt.Hs = envt.Hs * 0 + 0.86;		% 0.86
  
+%----------------------------------------------------------------------
+% Safety net: sets any lingering NaN values to the time-series mean
+if (1)
+   vname = fieldnames(envt);
+   for indv=1:length(vname)
+      tname = vname{indv};
+      tvar = envt.(tname);
+      if any(isnan(tvar(:)))
+         disp(['[make_envt_sb_obs.m] WARNING: NaN found in forcing for ' tname ' - replacing with mean value']);
+         tvar_mean = repmat(nanmean(tvar,2),[1 size(tvar,2)]);
+         tvar(isnan(tvar)) = tvar_mean(isnan(tvar));
+         envt.(tname) = tvar;
+      end
+   end
+end
+
 %----------------------------------------------------------------------
 % If needed makes a multi-panel plot of env. variables 
  if (0)

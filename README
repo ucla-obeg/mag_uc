@@ -1,4 +1,18 @@
+----------------------------------------------------------------------------------------------------
+November 14 2023
+To do: 
+
+- Make sure NaNs are properly dealt with. right now setnan2zero turns NaNs to 0, and allowss the code to run when
+  NaN are introduced, e.g. by the forcings. This is dangerous, should be recoded
+
+- Reorganize Input strategy to use files that already contain requrired forcings, rahter than creating them
+  inside the mag_run code.
+
+- Check time stepping consitency between MAG and the forcing files, maybe make it more general and safe
+
+----------------------------------------------------------------------------------------------------
 October 2023
 
 MAG code, uci/sccwrp version, recoded at UCLA
+
 
